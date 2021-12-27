@@ -1,0 +1,35 @@
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--
+       environments:使用具体的数据库信息
+       default：表示在配置多个数据库类型时，采用具体哪一个数据库去操作数据
+   -->
+    <environments default="mysql">
+        <!--
+        environment：表示一个具体的数据源
+        -->
+        <environment id="mysql">
+            <!--
+                transactionManager 事务管理者  交给jdbc来管理
+            -->
+            <transactionManager type="JDBC"/>
+            <!--
+                dataSource数据连接池
+            -->
+            <dataSource type="pooled">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3307/mysqltest?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+                <!--                <property name="nullCatalogMeansCurrent" value="true"/>-->
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/powernode/model/CarMapper.xml"/>
+    </mappers>
+
+</configuration>

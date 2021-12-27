@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.powernode.mapper.CarMapper" >
+    <resultMap id="BaseResultMap" type="com.powernode.model.Car">
+        <id property="id" column="c_id" jdbcType="INTEGER"/>
+        <result property="brand" column="c_brand" jdbcType="VARCHAR" />
+        <result property="color" column="c_color" jdbcType="VARCHAR" />
+        <result property="number"  column="c_number" jdbcType="VARCHAR" />
+        <result property="size" column="c_size" jdbcType="VARCHAR" />
+        <result property="status" column="c_status" jdbcType="INTEGER" />
+    </resultMap>
+
+    <update id="updateByIdList" parameterType="list">
+        update car
+         set c_status = 1
+        where c_id in
+        <foreach collection="list" open="("  close=")" item="ids" separator=",">
+            #{ids}
+        </foreach>
+    </update>
+
+    <!--改变所有状态值为1-->
+    <update id="updateByIdAll">
+        update car set c_status=1
+    </update>
+
+</mapper>
